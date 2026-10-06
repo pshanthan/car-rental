@@ -21,6 +21,8 @@ export class FormComponent implements OnInit {
     private rentalService: RentalService,
   ) {}
   currentCar: Car | null = null;
+  editingId: number | null = null;
+
   carForm = new FormGroup({
     make: new FormControl('', {
       nonNullable: true,
@@ -40,10 +42,10 @@ export class FormComponent implements OnInit {
     }),
   });
   ngOnInit(): void {
-    const editingId = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    if (editingId) {
-      const found = this.rentalService.getCars().subscribe((cars) => {
-        const found = cars.find((c) => c.id === editingId);
+    const idParam = this.activatedRoute.snapshot.paramMap.get('id');
+    if (idParam) {
+      this.rentalService.getCars().subscribe((cars) => {
+        const found = cars.find((c) => c.id === Number(idParam));
         if (found) {
           this.carForm.patchValue({
             make: found.make,
@@ -51,6 +53,7 @@ export class FormComponent implements OnInit {
             year: String(found.year),
             mileage: String(found.mileage),
           });
+          this.rentalService.updateCar(found);
         }
       });
     }
