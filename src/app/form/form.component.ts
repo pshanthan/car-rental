@@ -59,15 +59,19 @@ export class FormComponent implements OnInit {
     }
   }
   onSubmit() {
-    const addedCar = this.carForm.getRawValue();
+    const rawCar = this.carForm.getRawValue();
     this.currentCar = {
-      make: addedCar.make,
-      model: addedCar.model,
-      year: Number(addedCar.year),
-      mileage: Number(addedCar.mileage),
+      make: rawCar.make,
+      model: rawCar.model,
+      year: Number(rawCar.year),
+      mileage: Number(rawCar.mileage),
     };
     if (this.editingId) {
-      this.rentalService.updateCar(found);
+      ((this.currentCar.id = this.editingId),
+        this.rentalService.updateCar(this.currentCar));
+    } else {
+      this.rentalService.addCar(this.currentCar);
     }
+    this.carForm.reset();
   }
 }
