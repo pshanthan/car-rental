@@ -53,7 +53,6 @@ export class FormComponent implements OnInit {
             year: String(found.year),
             mileage: String(found.mileage),
           });
-          this.rentalService.updateCar(found);
         }
       });
     }
@@ -66,5 +65,6 @@ export class FormComponent implements OnInit {
       year: Number(addedCar.year),
       mileage: Number(addedCar.mileage),
     };
+    this.editingId = Number(idParam);
   }
 }
