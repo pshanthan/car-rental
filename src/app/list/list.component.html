@@ -1,0 +1,4 @@
+<div *ngFor="let c of cars">
+  {{ c.make }} - {{ c.make }} - {{ c.model }} -{{ c.year }} - {{ c.mileage }}
+  <button [routerLink]="['/edit', c.id]">Edit</button>
+</div>
