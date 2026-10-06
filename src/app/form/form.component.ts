@@ -67,6 +67,7 @@ export class FormComponent implements OnInit {
       mileage: Number(addedCar.mileage),
     };
     if (this.editingId) {
+      this.rentalService.updateCar(found);
     }
   }
 }
