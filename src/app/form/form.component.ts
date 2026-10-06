@@ -44,6 +44,7 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     const idParam = this.activatedRoute.snapshot.paramMap.get('id');
     if (idParam) {
+      this.editingId = Number(idParam);
       this.rentalService.getCars().subscribe((cars) => {
         const found = cars.find((c) => c.id === Number(idParam));
         if (found) {
@@ -65,6 +66,7 @@ export class FormComponent implements OnInit {
       year: Number(addedCar.year),
       mileage: Number(addedCar.mileage),
     };
-    this.editingId = Number(idParam);
+    if (this.editingId) {
+    }
   }
 }
