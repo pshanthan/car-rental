@@ -25,7 +25,7 @@ export class RentalService {
   }
   updateCar(c: Car) {
     const current = this.cars.value;
-    const nextList = current.map((p) => (p.id === c.id ? p : c));
+    const nextList = current.map((p) => (p.id === c.id ? c : p));
     return this.cars.next(nextList);
   }
 }
